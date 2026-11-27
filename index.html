@@ -17,38 +17,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE everyday: herramienta de bolsillo para la mesa
-   IDEA la mesa de póker misma: tocas un asiento y su rango se enciende en la matriz 13x13
-   PICTURE mesa ovalada de fieltro con 6 asientos + matriz de manos que se ilumina
-   COLOUR fondo noche #0b1411, fieltro #0f5a3c, rojo subir #e5484d, oro 3-bet #f2b84b, azul call #4aa3ff
+   IDEA la mesa de póker misma: tocas un asiento y una situación, y su rango se enciende en la matriz 13x13
+   PICTURE mesa ovalada de fieltro con 8 asientos + matriz de manos que se ilumina
+   COLOUR fondo noche #0b1411, fieltro #0f5a3c, rojo subir, oro 3-bet, violeta 4-bet, azul pagar
    TYPE Barlow Condensed (fichas, letras de mesa) + Inter
-   LAYOUT una columna: título corto, mesa, matriz, info; en laptop mesa a la izquierda y matriz a la derecha */
-:root{color-scheme:dark;--bg:#0b1411;--ink:#eef3ef;--mute:#9db1a7;--felt:#0f5a3c;--felt2:#0a4430;--rail:#3a2416;--cell:#18231f;--cellink:#5f746a;--raise:#e5484d;--three:#f2b84b;--call:#4aa3ff}
+   LAYOUT una columna en el teléfono: título, mesa, situaciones, matriz; en laptop mesa a la izquierda y matriz a la derecha */
+:root{color-scheme:dark;--bg:#0b1411;--ink:#eef3ef;--mute:#9db1a7;--panel:#121d19;--line:#2d3c36;--felt:#0f5a3c;--felt2:#0a4430;--rail:#3a2416;--cell:#18231f;--cellink:#5f746a;--raise:#e5484d;--three:#f2b84b;--four:#a77bff;--call:#4aa3ff}
 *{box-sizing:border-box;min-width:0}
 html,body{background:var(--bg)}
 body{color:var(--ink);font:15px/1.45 Inter,system-ui,sans-serif;overflow-x:clip;-webkit-tap-highlight-color:transparent}
 .wrap{max-width:1100px;margin:0 auto;padding-block:14px 28px;padding-left:max(4vw,16px,env(safe-area-inset-left,0px));padding-right:max(4vw,16px,env(safe-area-inset-right,0px))}
-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
 h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin:0}
 .sub{color:var(--mute);font-size:13px}
-.tabs{display:flex;gap:4px;background:#121d19;border-radius:999px;padding:4px}
+.tabs{display:flex;gap:4px;background:var(--panel);border-radius:999px;padding:4px}
 .tabs button{border:0;background:none;color:var(--mute);font:600 14px Inter,sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer;min-height:36px}
 .tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .main{display:grid;gap:16px}
 @media(min-width:880px){.main{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}.left{position:sticky;top:12px}}
-.table{position:relative;aspect-ratio:1.75;max-width:520px;margin:0 auto;width:100%}
-.felt{position:absolute;inset:11% 9%;border-radius:999px;background:radial-gradient(ellipse at 50% 40%,#147049,var(--felt) 55%,var(--felt2));box-shadow:0 0 0 9px var(--rail),0 0 0 11px #57382a,inset 0 0 30px #0006}
-.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;border:1px dashed #ffffff40;background:#0000;color:#e8f5ee;border-radius:14px;padding:6px 12px;font:600 13px Inter,sans-serif;cursor:pointer;min-height:40px}
-.center b{display:block;font:700 20px 'Barlow Condensed',sans-serif;letter-spacing:.01em}
+.table{position:relative;aspect-ratio:1.7;max-width:520px;margin:0 auto;width:100%}
+.felt{position:absolute;inset:12% 10%;border-radius:999px;background:radial-gradient(ellipse at 50% 40%,#147049,var(--felt) 55%,var(--felt2));box-shadow:0 0 0 9px var(--rail),0 0 0 11px #57382a,inset 0 0 30px #0006}
+.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;border:1px dashed #ffffff40;background:#0000;color:#e8f5ee;border-radius:14px;padding:6px 12px;font:600 12px Inter,sans-serif;cursor:pointer;min-height:40px}
+.center b{display:block;font:700 18px 'Barlow Condensed',sans-serif}
 .center[aria-pressed=true]{background:#ffffff1f;border-style:solid}
-.seat{position:absolute;transform:translate(-50%,-50%);width:clamp(52px,15%,74px);aspect-ratio:1;border-radius:50%;border:2px solid #2d3c36;background:#16211d;color:var(--ink);font:700 clamp(15px,3.6vw,20px) 'Barlow Condensed',sans-serif;cursor:pointer;display:grid;place-items:center;transition:transform .15s,background .15s}
-.seat small{display:block;font:500 11px Inter,sans-serif;color:var(--mute);margin-top:-2px}
+.seat{position:absolute;transform:translate(-50%,-50%);width:clamp(46px,13%,66px);aspect-ratio:1;border-radius:50%;border:2px solid var(--line);background:#16211d;color:var(--ink);font:700 clamp(13px,3.3vw,18px)/1 'Barlow Condensed',sans-serif;cursor:pointer;display:grid;place-items:center;padding:0;transition:transform .15s,background .15s}
 .seat[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translate(-50%,-50%) scale(1.1)}
-.seat[aria-pressed=true] small{color:#3c4a44}
-.dealer{position:absolute;width:22px;height:22px;border-radius:50%;background:#fff;color:#111;font:700 12px Inter,sans-serif;display:grid;place-items:center;box-shadow:0 1px 0 #0005}
-.tip{background:#121d19;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:14.5px}
-.tip strong{font-weight:600}
-.tip .size{float:right;font:700 15px 'Barlow Condensed',sans-serif;background:#ffffff14;border-radius:6px;padding:1px 8px;margin-left:8px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mute);margin:10px 0 8px}
+.dealer{position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;color:#111;font:700 11px Inter,sans-serif;display:grid;place-items:center;transform:translate(-50%,-50%)}
+.sits{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.sits button,.vars button,.focus button{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:7px 13px;font:600 14px Inter,sans-serif;cursor:pointer;min-height:40px}
+.sits button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.vars{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center;color:var(--mute);font-size:13px}
+.vars button{min-height:34px;padding:5px 12px;font-size:13px;color:var(--mute)}
+.vars button[aria-pressed=true]{background:#ffffff1a;color:var(--ink);border-color:#ffffff55}
+.tip{background:var(--panel);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14.5px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mute);margin:8px 0}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .gridhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 .gridhead h2{font:700 24px/1.1 'Barlow Condensed',sans-serif;margin:0}
@@ -57,9 +59,10 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
 .grid{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:2px;user-select:none}
 .c{aspect-ratio:1;border:0;border-radius:3px;background:var(--cell);color:var(--cellink);font:600 clamp(9.5px,2.55vw,13px) Inter,sans-serif;display:grid;place-items:center;padding:0;cursor:pointer;transition:background .18s,color .18s}
 .c.on{color:#fff}
+.c.dark{color:#241a00}
 .c.sel{outline:2px solid #fff;outline-offset:-1px;z-index:1}
 .c.pair{font-weight:700}
-.info{min-height:48px;margin-top:10px;background:#121d19;border-radius:10px;padding:10px 12px;font-size:14px;color:var(--mute)}
+.info{min-height:48px;margin-top:10px;background:var(--panel);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--mute)}
 .info b{color:var(--ink);font:700 18px 'Barlow Condensed',sans-serif;margin-right:6px}
 .quiz{display:grid;gap:14px;justify-items:center;text-align:center;padding-block:6px}
 .qpos{font:700 22px 'Barlow Condensed',sans-serif}
@@ -69,24 +72,19 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
 .card.red{color:#d31f2b}
 .card .s{align-self:flex-end;font-size:30px}
 .answers{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.answers button{min-width:96px;min-height:52px;border-radius:12px;border:0;font:700 19px 'Barlow Condensed',sans-serif;cursor:pointer;color:#fff}
+.answers button{min-width:96px;min-height:52px;border-radius:12px;border:0;font:700 19px 'Barlow Condensed',sans-serif;cursor:pointer;color:#fff;padding:0 14px}
 .answers button:active{transform:translateY(1px)}
-.b-fold{background:#33413b}.b-raise{background:var(--raise)}.b-three{background:var(--three);color:#2a1d00!important}.b-call{background:var(--call)}
+.b-fold{background:#33413b}.b-raise{background:var(--raise)}.b-three{background:var(--three);color:#2a1d00!important}.b-four{background:var(--four)}.b-call{background:var(--call)}
 .fb{min-height:44px;font-size:15px}
 .fb.ok b{color:#5fd58a}.fb.bad b{color:#ff7a7e}
 .score{display:flex;gap:18px;color:var(--mute);font-size:13px}
 .score b{display:block;color:var(--ink);font:700 24px 'Barlow Condensed',sans-serif}
 .focus{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.focus button{border:1px solid #2d3c36;background:none;color:var(--mute);border-radius:999px;padding:6px 12px;font:600 13px Inter,sans-serif;cursor:pointer;min-height:34px}
+.focus button{min-height:34px;padding:5px 11px;font-size:13px;color:var(--mute)}
 .focus button[aria-pressed=true]{background:#ffffff1a;color:var(--ink);border-color:#ffffff55}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#121d19;border-radius:12px;padding:4px;margin-top:14px}
-.seg button{border:0;background:none;color:var(--mute);font:600 15px Inter,sans-serif;min-height:44px;border-radius:9px;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
-.opp{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:14px;color:var(--mute)}
-.opp button{border:1px solid #2d3c36;background:none;color:var(--ink);border-radius:999px;padding:6px 14px;font:700 16px 'Barlow Condensed',sans-serif;cursor:pointer;min-height:38px}
-.opp button[aria-pressed=true]{background:var(--raise);border-color:var(--raise)}
-.seat.opener{border-color:var(--raise);box-shadow:0 0 0 3px #e5484d66}
-.seat.off{opacity:.35}
+.types{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.types button{border:1px solid var(--line);background:none;color:var(--mute);border-radius:8px;padding:5px 10px;font:600 13px Inter,sans-serif;cursor:pointer;min-height:32px}
+.types button[aria-pressed=true]{background:var(--felt);color:#fff;border-color:var(--felt)}
 .foot{color:var(--mute);font-size:13px;margin-top:18px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -94,8 +92,8 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
 </head><body>
 <div class="wrap">
   <header>
-    <div><h1>Rangos Preflop</h1><div class="sub">6-max · cash · 100 bb · 20 tablas</div></div>
-    <div class="tabs" role="tablist">
+    <div><h1>Rangos Preflop</h1><div class="types" id="types"></div></div>
+    <div class="tabs">
       <button id="tRangos" aria-pressed="true">Rangos</button>
       <button id="tQuiz" aria-pressed="false">Practicar</button>
     </div>
@@ -106,8 +104,8 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
         <div class="felt"></div>
         <button class="center" id="center" aria-pressed="false">Toca un asiento<b>o ver todas</b></button>
       </div>
-      <div class="seg" id="mode"><button data-m="open">Abrir primero</button><button data-m="vs">Contra subida</button></div>
-      <div class="opp" id="opp"></div>
+      <div class="sits" id="sits"></div>
+      <div class="vars" id="vars"></div>
       <div class="tip" id="tip"></div>
     </div>
     <div>
@@ -115,7 +113,7 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
         <div class="gridhead"><h2 id="gTitle"></h2><div class="pct" id="pct"></div></div>
         <div class="legend" id="legend"></div>
         <div class="grid" id="grid"></div>
-        <div class="info" id="info">Toca una mano para ver desde qué posición se juega.</div>
+        <div class="info" id="info"></div>
       </section>
       <section id="vQuiz" hidden>
         <div class="quiz">
@@ -127,181 +125,240 @@ h1{font:700 32px/1.05 'Barlow Condensed',sans-serif;letter-spacing:-.01em;margin
           <div class="score"><div><b id="sOk">0</b>aciertos</div><div><b id="sTot">0</b>jugadas</div><div><b id="sStreak">0</b>racha</div><div><b id="sBest">0</b>mejor racha</div></div>
         </div>
       </section>
-      <div class="foot">Rangos de referencia simplificados (aprox. GTO 6-max). Contra subida: el rival abre 2,5 bb (la SB 3 bb) y el resto foldea; 3-bet ~3x en posición, ~4x fuera de posición.</div>
+      <div class="foot">Suited arriba a la derecha de la diagonal, offsuit abajo a la izquierda. Toca cualquier mano para ver desde dónde se abre.<br><span id="src"></span></div>
     </div>
   </div>
 </div>
 
-
 <script>
 {
 const R='AKQJT98765432';
-const POS=['UTG','HJ','CO','BTN','SB','BB'];
-const OPEN={
-  UTG:{r:'55+,A2s+,K9s+,Q9s+,J9s+,T9s,98s,87s,76s,ATo+,KJo+',size:'2,5 bb',tip:'Quedan 5 jugadores por hablar. Abre solo manos que aguanten un 3-bet: pares, Ax suited y broadways.'},
-  HJ:{r:'44+,A2s+,K8s+,Q9s+,J9s+,T8s+,97s+,86s+,75s+,65s,A9o+,KTo+,QJo',size:'2,5 bb',tip:'Como UTG, más el 44, algunas suited conectadas y A9o / KTo / QJo.'},
-  CO:{r:'22+,A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,86s+,75s+,64s+,54s,A8o+,A5o,KTo+,QTo+,JTo',size:'2,5 bb',tip:'Empieza el robo: solo quedan el BTN y las ciegas. Todos los pares y todas las Ax suited.'},
-  BTN:{r:'22+,A2s+,K2s+,Q4s+,J6s+,T6s+,96s+,85s+,74s+,63s+,53s+,43s,A2o+,K8o+,Q9o+,J9o+,T8o+,98o,87o',size:'2,5 bb',tip:'La mejor posición: juegas todo el postflop con ventaja. Abre casi la mitad de las manos.'},
-  SB:{r:'22+,A2s+,K2s+,Q5s+,J7s+,T7s+,97s+,86s+,75s+,64s+,54s,A2o+,K9o+,Q9o+,J9o+,T9o',size:'3 bb',tip:'Sin completar: sube o fold. Jugarás fuera de posición contra la BB, así que sube un poco más grande.'}
+const AA5='AdAh,AdAs,AhAs,AdAc,AhAc,KhKs,KhKc,KsKc';
+// ===== Mesa de 9 =====
+const G={
+  open:{UTG:'77+,A9s+,KTs+,QJs,JTs,AQo+','UTG+1':'77+,A9s+,KTs+,QTs+,JTs,AJo+,KQo',LJ:'66+,A9s+,A5s,KTs+,QTs+,JTs,AJo+,KQo',HJ:'66+,A9s+,A5s,KTs+,QTs+,JTs,T9s,AJo+,KJo+',
+        CO:'22+,A2s+,K9s+,Q9s+,J9s+,T9s,98s,87s,76s,65s,ATo+,KTo+,QTo+,JTo',BTN:'22+,A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,86s+,75s+,64s+,54s,A5o+,K9o,T9o,KTo+,QTo+,JTo',
+        SB:'22+,A2s+,K9s+,Q9s+,J9s+,T9s,98s,87s,76s,65s,ATo+,KTo+,QTo+,JTo'},
+  pct:{UTG:'8,45','UTG+1':'10,56',LJ:'11,31',HJ:'12,52',CO:'22,8',BTN:'32,7',SB:'22,8'},
+  rolEarly:'77+,A9s+,KTs+,QTs+,JTs,AJo+,KQo',rolLate:'77+,A9s+,KTs+,QTs+,JTs,T9s,ATo+,KTo+,QTo+,JTo',
+  overlimp:'22-66,A2s-A8s',tb5:'TT+,AQs+,KQs,AQo+',tbBtnCo:'TT+,ATs+,KQs,AJo+',overcall:'22-99,A2s-AJs',
+  c3oop:'66-JJ,ATs-AQs',c3ip:'66-JJ,ATs-AQs,KQs,QJs,JTs,AQo',
+  fbGen:'QQ+,AKs,AKo',fbTight:'KK+',fbLoose:'TT+,AQs+,AQo+',squeeze:'TT+,ATs+,KQs,AQo+,KQo',
+  cc2SB:'22-99,A2s-A9s,K9s-KJs,Q9s-QJs,J9s-JTs,T9s,98s,87s,76s,65s,AJo,KJo,QJo,ATo,KTo,QTo,JTo',
+  cc1SB:'22-99,A2s-A9s,KTs-KJs,QTs-QJs,JTs',
+  ccBB:'22-99,A2s-A9s,K5s-KJs,Q8s-QJs,J8s-JTs,T8s-T9s,97s-98s,86s-87s,75s-76s,64s-65s,54s,A5o-AJo,K9o-KJo,QTo-QJo,JTo,T9o'
 };
-// VS[opener][hero] = {t:3-bet, c:pagar}
-const VS={
-  UTG:{HJ:{t:'QQ+,AKs,AKo,A5s-A4s',c:'99-JJ,AJs-AQs,KQs,QJs,JTs'},
-       CO:{t:'QQ+,AKs,AKo,A5s-A4s',c:'88-JJ,ATs-AQs,KJs-KQs,QJs,JTs,T9s,AQo'},
-       BTN:{t:'QQ+,AKs,AKo,A5s-A4s,KJs',c:'22-JJ,A9s-AQs,KTs,KQs,QTs-QJs,JTs,T9s,98s,87s,76s,AQo,KQo'},
-       SB:{t:'TT+,AQs+,AKo,A5s-A4s,KQs',c:''},
-       BB:{t:'QQ+,AKs,AKo,A5s',c:'22-JJ,A2s-AQs,K9s-KQs,Q9s-QJs,J9s-JTs,T8s-T9s,97s-98s,86s-87s,76s,65s,54s,ATo-AQo,KJo-KQo'}},
-  HJ:{CO:{t:'QQ+,AKs,AQs,AKo,A5s-A4s,KQs',c:'88-JJ,ATs-AJs,KJs,QJs,JTs,T9s,AQo'},
-      BTN:{t:'JJ+,AQs+,AKo,A5s-A4s,KQs,K9s,76s',c:'22-TT,A9s-AJs,KTs-KJs,QTs-QJs,JTs,T9s,98s,87s,65s,AJo-AQo,KQo'},
-      SB:{t:'TT+,AJs+,KJs+,QJs,AQo+,A5s-A4s',c:''},
-      BB:{t:'JJ+,AQs+,AKo,A5s-A4s,K9s',c:'22-TT,A2s-AJs,KTs-KQs,Q8s-QJs,J8s-JTs,T8s-T9s,97s-98s,86s-87s,75s-76s,64s-65s,54s,ATo-AQo,KJo-KQo,QJo'}},
-  CO:{BTN:{t:'TT+,AJs+,KQs,AQo+,A5s-A4s,K9s,Q9s,J9s,76s,65s',c:'22-99,A7s-ATs,KTs-KJs,QTs-QJs,JTs,T9s,98s,87s,ATo-AJo,KJo-KQo,QJo'},
-      SB:{t:'99+,ATs+,KTs+,QTs+,JTs,T9s,98s,A5s-A4s,AJo+,KQo',c:''},
-      BB:{t:'TT+,AJs+,KQs,AQo+,A5s-A3s,K8s,Q9s,J9s,T8s,65s',c:'22-99,A2s-ATs,K2s-KJs,Q6s-QJs,J7s-JTs,T7s-T9s,96s-98s,85s-87s,74s-76s,63s-64s,53s-54s,43s,A8o-AJo,KTo-KQo,QTo-QJo,JTo'}},
-  BTN:{SB:{t:'88+,A8s+,A5s-A2s,K9s+,Q9s+,J9s+,T9s,98s,87s,76s,65s,ATo+,KJo+,QJo',c:''},
-       BB:{t:'TT+,AJs+,KJs+,AQo+,A5s-A4s,Q9s,J9s,76s,65s,54s',c:'22-99,A2s-ATs,K2s-KTs,Q2s-QJs,J4s-JTs,T6s-T9s,95s-98s,85s-87s,74s-75s,64s,53s,43s,A2o-AJo,K7o-KQo,Q8o-QJo,J8o-JTo,T8o-T9o,98o,87o'}},
-  SB:{BB:{t:'88+,A8s+,A5s-A4s,KTs+,QJs,K5s,Q8s,J8s,T8s,97s,86s,75s,ATo+,KJo+',c:'22-77,A2s-A7s,K2s-K9s,Q2s-QTs,J4s-JTs,T6s-T9s,95s-98s,85s-87s,74s-76s,64s-65s,53s-54s,43s,A2o-A9o,K5o-KTo,Q8o-QJo,J8o-JTo,T8o-T9o,98o,87o'}}
+function sits9(p){
+  const s=[],early=['UTG','UTG+1','LJ','SB'].includes(p),ip=!['SB','BB'].includes(p);
+  if(p!=='BB')s.push(['Abrir',[{t:p+' · abrir ('+G.pct[p]+' %)',layers:{raise:G.open[p]},q:'todos foldean hasta ti',tip:'Nadie ha entrado al bote: subes o foldeas.'}]]);
+  if(p!=='BB')s.push(['Sobre limpers',[{t:p+' · subir sobre limpers ('+(early?'10,6':'16,3')+' %)',layers:{raise:early?G.rolEarly:G.rolLate},q:'hay limpers antes que tú',tip:early?'Rango de rol de UTG, LJ y SB.':'Rango de rol de HJ, CO y BTN.'}]]);
+  if(p==='BTN'||p==='SB')s.push(['Overlimp',[{t:p+' · overlimp',layers:{limp:G.overlimp},q:'hay limpers antes que tú (manos que no subes)',tip:'Pares chicos y Ax suited para ver el flop barato detrás de los limpers.'}]]);
+  if(p==='SB'){
+    s.push(['Contra 1 subida',[{t:'SB · 3-bet o coldcall contra 1 jugador',layers:{three:G.squeeze,call:G.cc1SB},q:'un jugador sube, el resto foldea',tip:'3-bet con valor; coldcall con pares y suited.'}]]);
+    s.push(['Contra 2 / limpers',[{t:'SB · squeeze o coldcall con 2 jugadores',layers:{three:G.squeeze,call:G.cc2SB},q:'hay una subida y un call (o limpers)',tip:'Squeeze con valor; con más jugadores en el bote pagas más ancho.'}]]);
+  }else if(p==='BB'){
+    s.push(['Contra subida',[{t:'BB · jugar contra subida (32,7 %)',layers:{three:G.squeeze,call:G.ccBB},q:'alguien sube y te toca en la BB',tip:'3-bet o squeeze con valor; coldcall con el resto del rango.'}]]);
+  }else{
+    const v=[{v:'General',t:p+' · 3-bet (5 % del rango)',layers:{three:G.tb5},q:'un jugador sube antes que tú',tip:'3-bet solo por valor.'}];
+    if(p==='BTN')v.push({v:'BTN vs CO',t:'BTN · 3-bet contra subida del CO',layers:{three:G.tbBtnCo},q:'el CO sube',tip:'Contra el CO se amplía: AJs, ATs y AJo entran.'});
+    s.push(['3-bet',v]);
+  }
+  if(p==='BTN')s.push(['Overcall',[{t:'BTN · overcall',layers:{call:G.overcall},q:'hay una subida y un call antes que tú',tip:'Pares y Ax suited para entrar al bote con varios jugadores.'}]]);
+  if(p!=='BB'){
+    const v=[];
+    if(ip)v.push({v:'En posición',t:p+' · pagar 3-bet en posición (5,4 %)',layers:{call:G.c3ip},q:'abriste y te hacen 3-bet; jugarás en posición',tip:'Pagas el 3-bet con pares medios y suited fuertes.'});
+    v.push({v:'Fuera de posición',t:p+' · pagar 3-bet fuera de posición (3,6 %)',layers:{call:G.c3oop},q:'abriste y te hacen 3-bet; jugarás fuera de posición',tip:'Fuera de posición el call es más estrecho.'});
+    s.push(['Pagar 3-bet',v]);
+  }
+  s.push(['4-bet / 5-bet',[
+    {v:'General',t:p+' · 4-bet / 5-bet general',layers:{four:G.fbGen},q:'te hacen 3-bet',tip:'QQ+ y AK.'},
+    {v:'Vs tight',t:p+' · 4-bet / 5-bet contra jugadores tight',layers:{four:G.fbTight},q:'un jugador tight te hace 3-bet',tip:'Contra un tight, solo AA y KK.'},
+    {v:'Vs loose',t:p+' · 4-bet / 5-bet contra jugadores loose',layers:{four:G.fbLoose},q:'un jugador loose te hace 3-bet',tip:'Contra un loose se amplía a TT+ y AQ+.'}]]);
+  return s;
+}
+// ===== Mesa de 6: PokerStrategy.com, Big Stack Strategy, lecciones 2253-2258 =====
+const P6={
+  open:{UTG:'55+,ATs+,KTs+,QTs+,J9s+,T8s+,97s+,87s,76s,AJo+,KQo',MP:'22+,ATs+,A2s-A5s,KTs+,QTs+,65s+,J9s,T8s,97s,AJo+,KJo+',
+    CO:'22+,A2s+,K7s+,Q8s+,J7s+,T7s+,96s+,85s+,75s+,65s,54s,A9o+,K9o+,Q9o+,J9o+,T9o,98o',
+    BTN:'22+,A2s+,K2s+,Q2s+,J3s+,T3s+,94s+,84s+,73s+,63s+,53s+,43s,A2o+,K5o+,Q7o+,J7o+,T6o+,96o+,86o+,76o,65o',
+    SB:'66+,A2s+,K7s+,Q7s+,J7s+,T7s+,96s+,85s+,75s+,64s+,54s,A9o+,K9o+,Q9o+,J9o+,T9o,98o'},
+  n:{UTG:176,MP:226,CO:426,BTN:826,SB:410},
+  size:{UTG:'3 bb',MP:'3 bb',CO:'2,5 bb',BTN:'2 bb',SB:'3 bb'},
+  vs:{
+    UTG:{MP:{c:'AsAc,KdKh,KdKs,KdKc,QQ-88,AQs+,KQs,AKo',t:'AJs,T9s,98s,87s,AQo,'+AA5,n:94},
+         CO:{c:'AsAc,KdKh,KdKs,KdKc,QQ-66,AQs+,KQs,QJs,JTs,T9s,98s,AKo',t:'AQo,AJs,'+AA5,n:110},
+         BTN:{c:'JJ-55,AsAc,KdKh,KdKs,KdKc,QdQh,QdQs,QdQc,AJs+,KQs,JTs-98s,AdKh,AdKs,AdKc,AhKs,AhKc,AsKc',t:'87s,76s,65s,AQo,KQo,'+AA5+',QhQs,QhQc,QsQc,AhKd,AsKd,AsKh,AcKd,AcKh,AcKs',n:136},
+         SB:{c:'QQ-88,AQs+,AKo',t:'AQo,KQs,KK+',n:78},
+         BB:{c:'QQ-77,AQs+,KQs,JTs,T9s,AQo+',t:'AJs,KQo,KK+',n:108}},
+    MP:{CO:{c:'AsAc,KdKh,KdKs,KdKc,JJ-66,ATs+,KTs+,QTs+,JTs,T9s,98s,AQo',t:'87s,76s,65s,AJo,KJo+,'+AA5+',QQ,AKo',n:174},
+        BTN:{c:'JJ-55,AsAc,KdKh,KdKs,KdKc,AJs+,KQ,QJs,JTs,T9s,98s,AQo',t:'ATs,KJs,J9s,T8s,97s,87s,76s,AJo,KJo,'+AA5+',QQ,AKo',n:180},
+        SB:{c:'QQ-77,AQs+,KQs,JTs,T9s,AKo',t:'AQo,KQo,KK+',n:104},
+        BB:{c:'QQ-66,AJs+,KQs,JTs,T9s,AQo+,KQo',t:'KJs,AJo,KK+',n:130}},
+    CO:{BTN:{c:'99-55,AsAc,KdKh,KdKs,KdKc,AQs-A9s,K9s+,Q9s+,J9s+,T8s+,97s+,87s,AJo,KJo+,QJo',t:'A5s-A2s,K8s,Q8s,J8s,T7s,96s,86s,76s,65s,54s,ATo,QQ-TT,'+AA5+',AKs,AQo+',n:272},
+        SB:{c:'99-66,AsAc,KdKh,KdKs,KdKc,AQs-AJs,KJs+,QJs,JTs,T9s,98s,AJo,KQo',t:'ATs,A5s-A2s,KTs,QTs,J9s,T8s,97s,86s+,76s,KJo,QQ-TT,'+AA5+',AKs,AQo+',n:202},
+        BB:{c:'AsAc,KdKh,KdKs,KdKc,99-55,AQs-A2s,K8s+,Q9s+,J9s+,T8s+,97s+,87s,AJo-ATo,KTo+,QJo',t:'K7s-K6s,Q8s,J8s,T7s,86s,76s,65s,A9o,QTo,JTo,AQo,QQ-TT,'+AA5+',AK',n:332}},
+    BTN:{SB:{c:'99-66,AsAc,KdKh,KdKs,KdKc,AQs-ATs,KTs+,QTs+,JTs,T9s,98s,87s,76s,AJo-ATo,KJo+,QJo',t:'A9s,A5s-A2s,K9s,Q9s,J9s,T8s,97s,86s,75s,65s,KTo,QTo,QQ-TT,'+AA5+',AKs,AQo+',n:270},
+         BB:{c:'AsAc,KdKh,KdKs,KdKc,99-22,AJs-A2s,K2s+,Q2s+,J6s+,T6s+,96s+,85s+,75s+,64s+,54s,AJo-A2o,K7o+,Q7o+,J7o+,T8o+,98o',t:'J5s-J4s,T5s-T4s,95s-94s,84s,74s,63s,53s,43s,K6o,Q6o,T7o,97o,87o,76o,'+AA5+',QQ-TT,AQ+',n:766}},
+    SB:{BB:{c:'AsAc,KdKh,KdKs,KdKc,99-22,AQs-A2s,K7s+,Q7s+,J7s+,T7s+,97s+,86s+,75s+,64s+,54s,AQo-A7o,K8o+,Q8o+,J8o+,T8o+,98o',t:'K6s-K2s,Q6s-Q2s,A6o-A2o,K7o-K6o,Q7o-Q6o,'+AA5+',AK,QQ-TT',n:646}}
+  }
 };
-const VTIP={HJ:'Muchos jugadores detrás: 3-bet o fold casi siempre, pagas poco.',CO:'Aún quedan BTN y ciegas: rango de call estrecho y fuerte.',BTN:'En posición puedes pagar más: pares, suited y broadways.',SB:'Fuera de posición y con la BB detrás: 3-bet o fold, nunca pagar.',BB:'Cierras la acción con 1 bb puesta: defiende ancho pagando y 3-betea valor + algunas suited.'};
-const COL={raise:'var(--raise)',three:'var(--three)',call:'var(--call)'};
-const HEAT={UTG:'#a3123a',HJ:'#e5484d',CO:'#f0834a',BTN:'#f2b84b',SB:'#8fb573'};
-const LBL={raise:'Subir',three:'3-bet',call:'Pagar',fold:'Fold'};
+const POS6=['UTG','MP','CO','BTN','SB','BB'];
+function sits6(p){
+  const s=[];
+  if(P6.open[p])s.push(['Abrir',[{t:p+' · abrir ('+(P6.n[p]/13.26).toFixed(0)+' %)',layers:{raise:P6.open[p]},q:'todos foldean hasta ti',tip:`Nadie ha entrado al bote: sube ${P6.size[p]} o foldea.`}]]);
+  const ops=POS6.filter(o=>P6.vs[o]&&P6.vs[o][p]);
+  if(ops.length)s.push(['Contra subida',ops.map(o=>({v:'vs '+o,t:p+' contra subida de '+o,layers:{three:P6.vs[o][p].t,call:P6.vs[o][p].c},q:o+' sube, el resto foldea',tip:`Contra la subida de ${o}; el resto foldea.`}))]);
+  return s;
+}
+const TYPES={
+  '9':{label:'Mesa de 9',POS:['UTG','UTG+1','LJ','HJ','CO','BTN','SB','BB'],open:G.open,sits:sits9,
+       ANG:{BTN:58,SB:100,BB:145,UTG:195,'UTG+1':240,LJ:290,HJ:335,CO:15},
+       HEAT:{UTG:'#7d0f2e','UTG+1':'#a3123a',LJ:'#c8263f',HJ:'#e5484d',CO:'#f0834a',BTN:'#f2b84b',SB:'#8fb573'},
+       src:''},
+  '6':{label:'Mesa de 6',POS:POS6,open:P6.open,sits:sits6,
+       ANG:{BTN:60,SB:120,BB:180,UTG:240,MP:300,CO:0},
+       HEAT:{UTG:'#a3123a',MP:'#e5484d',CO:'#f0834a',BTN:'#f2b84b',SB:'#8fb573'},
+       src:'Fuente: PokerStrategy.com, Big Stack Strategy, rangos preflop 6-max (lecciones 2253 a 2258), basados en 1,5 millones de manos de NL200. MP = HJ. 3-bet ~8 bb contra 3 bb.'}
+};
+const A={raise:{l:'Subir',c:'var(--raise)'},three:{l:'3-bet',c:'var(--three)',dark:1},four:{l:'4-bet',c:'var(--four)'},call:{l:'Pagar',c:'var(--call)'},limp:{l:'Limp',c:'var(--call)'}};
 const ri=c=>R.indexOf(c);
 const name=(i,j)=>i===j?R[i]+R[j]:i<j?R[i]+R[j]+'s':R[j]+R[i]+'o';
 const combos=h=>h.length===2?6:h[2]==='s'?4:12;
+const CACHE={};
 function expand(str){
-  const out=new Set();
-  for(let t of (str||'').split(',')){
+  if(CACHE[str])return CACHE[str];
+  const out=new Set(),add=(a,b,t)=>{if(a===b){out.add(R[a]+R[a]);return}const hi=Math.min(a,b),lo=Math.max(a,b);if(t!=='o')out.add(R[hi]+R[lo]+'s');if(t!=='s')out.add(R[hi]+R[lo]+'o')};
+  for(let t of str.split(',')){
     t=t.trim();let m;if(!t)continue;
-    if(m=t.match(/^(.)\1-(.)\2$/)){const a=ri(m[1]),b=ri(m[2]);for(let k=Math.min(a,b);k<=Math.max(a,b);k++)out.add(R[k]+R[k]);continue}
-    if(m=t.match(/^(.)\1(\+)?$/)){const k=ri(m[1]);if(m[2])for(let x=0;x<=k;x++)out.add(R[x]+R[x]);else out.add(R[k]+R[k]);continue}
-    if(m=t.match(/^(.)(.)([so])-(.)(.)([so])$/)){const a=ri(m[2]),b=ri(m[5]);for(let k=Math.min(a,b);k<=Math.max(a,b);k++)out.add(m[1]+R[k]+m[3]);continue}
-    if(m=t.match(/^(.)(.)([so])(\+)?$/)){const h=ri(m[1]),k=ri(m[2]);if(m[4])for(let x=h+1;x<=k;x++)out.add(m[1]+R[x]+m[3]);else out.add(t)}
+    if(m=t.match(/^(.)[shdc](.)[shdc]$/)){const s=t[1]===t[3];add(ri(t[0]),ri(t[2]),t[0]===t[2]?'':s?'s':'o');continue}
+    if(m=t.match(/^(.)\1-(.)\2$/)){const a=ri(m[1]),b=ri(m[2]);for(let k=Math.min(a,b);k<=Math.max(a,b);k++)add(k,k);continue}
+    if(m=t.match(/^(.)\1(\+)?$/)){const k=ri(m[1]);if(m[2])for(let x=0;x<=k;x++)add(x,x);else add(k,k);continue}
+    if(m=t.match(/^(.)(.)([so]?)-(.)(.)([so]?)$/)){
+      const h1=ri(m[1]),k1=ri(m[2]),h2=ri(m[4]),k2=ri(m[5]);
+      if(h1===h2){for(let k=Math.min(k1,k2);k<=Math.max(k1,k2);k++)add(h1,k,m[3])}
+      else{const g=k1-h1;for(let h=Math.min(h1,h2);h<=Math.max(h1,h2);h++)add(h,h+g,m[3])}
+      continue}
+    if(m=t.match(/^(.)(.)([so]?)(\+)?$/)){
+      const h=ri(m[1]),k=ri(m[2]);
+      if(!m[4])add(h,k,m[3]);
+      else if(k-h===1&&h>0){for(let x=h;x>=0;x--)add(x,x+1,m[3])} // conectores: 65s+ = 65s,76s,...
+      else for(let x=h+1;x<=k;x++)add(h,x,m[3]);
+    }
   }
-  return out;
+  return CACHE[str]=out;
 }
-const SO={};for(const p in OPEN)SO[p]=expand(OPEN[p].r);
-const SV={};for(const o in VS){SV[o]={};for(const h in VS[o])SV[o][h]={t:expand(VS[o][h].t),c:expand(VS[o][h].c)}}
-const openersOf=h=>POS.slice(0,POS.indexOf(h)).filter(o=>VS[o]&&VS[o][h]);
-function act(sc,h){
-  if(sc.mode==='open')return SO[sc.pos].has(h)?'raise':'fold';
-  const s=SV[sc.opp][sc.pos];return s.t.has(h)?'three':s.c.has(h)?'call':'fold';
-}
-const earliest=h=>POS.slice(0,5).find(p=>SO[p].has(h));
-
+const ORDER=['four','three','raise','call','limp'];
+const acts=(tab,h)=>ORDER.filter(k=>tab.layers[k]&&expand(tab.layers[k]).has(h));
 const $=id=>document.getElementById(id);
-let st={mode:'open',pos:'BTN',opp:'CO',all:false,sel:null};
-try{const s=JSON.parse(localStorage.getItem('rangos2')||'{}');if(POS.includes(s.pos))Object.assign(st,s)}catch(e){}
-function fix(){
-  if(st.mode==='open'&&st.pos==='BB'){st.mode='vs'}
-  if(st.mode==='vs'){
-    if(st.pos==='UTG')st.pos='HJ';
-    const ops=openersOf(st.pos);if(!ops.includes(st.opp))st.opp=ops[ops.length-1];
-  }
-}
-function save(){try{localStorage.setItem('rangos2',JSON.stringify({mode:st.mode,pos:st.pos,opp:st.opp}))}catch(e){}}
+let ty='9',T=TYPES[ty],st={pos:'BTN',sit:0,v:0,all:false,sel:null},q=null;
+function load(){st={pos:'BTN',sit:0,v:0,all:false,sel:null};try{const s=JSON.parse(localStorage.getItem('rangos_'+ty)||'{}');if(T.POS.includes(s.pos))Object.assign(st,{pos:s.pos,sit:s.sit|0,v:s.v|0})}catch(e){}}
+try{const t=localStorage.getItem('rangosTipo');if(TYPES[t]){ty=t;T=TYPES[t]}}catch(e){}
+load();
+const OPENPOS=()=>T.POS.filter(p=>T.open[p]);
+const earliest=h=>OPENPOS().find(p=>expand(T.open[p]).has(h));
+function cur(){const s=T.sits(st.pos);if(st.sit>=s.length)st.sit=0;const vs=s[st.sit][1];if(st.v>=vs.length)st.v=0;return vs[st.v]}
+function save(){try{localStorage.setItem('rangos_'+ty,JSON.stringify({pos:st.pos,sit:st.sit,v:st.v}));localStorage.setItem('rangosTipo',ty)}catch(e){}}
 
 const table=$('table');
-const ANG={BTN:60,SB:120,BB:180,UTG:240,HJ:300,CO:0};
-const SUBL={UTG:'1º',HJ:'2º',CO:'3º',BTN:'botón',SB:'ciega peq.',BB:'ciega gr.'};
-for(const p of POS){
-  const a=ANG[p]*Math.PI/180,b=document.createElement('button');
-  b.className='seat';b.dataset.p=p;b.style.left=(50+43*Math.cos(a))+'%';b.style.top=(50+41*Math.sin(a))+'%';
-  b.innerHTML=p+'<small>'+SUBL[p]+'</small>';
-  b.onclick=()=>{st.all=false;st.sel=null;if(st.mode==='vs'&&openersOf(st.pos).includes(p)&&p!==st.pos&&POS.indexOf(p)<POS.indexOf(st.pos)){st.opp=p}else{st.pos=p}fix();save();render()};
-  table.appendChild(b);
-  if(p==='BTN'){const d=document.createElement('div');d.className='dealer';d.textContent='D';d.style.left=(50+30*Math.cos(a))+'%';d.style.top=(50+26*Math.sin(a)-6)+'%';table.appendChild(d)}
+function seats(){
+  table.querySelectorAll('.seat,.dealer').forEach(e=>e.remove());
+  for(const p of T.POS){
+    const a=T.ANG[p]*Math.PI/180,b=document.createElement('button');
+    b.className='seat';b.dataset.p=p;b.textContent=p;
+    b.style.left=(50+43*Math.cos(a))+'%';b.style.top=(50+41*Math.sin(a))+'%';
+    b.onclick=()=>{if(q&&!q.done)return;const prev=T.sits(st.pos)[st.sit][0];st.pos=p;st.all=false;st.sel=null;
+      const s=T.sits(p),k=s.findIndex(x=>x[0]===prev);st.sit=k<0?0:k;st.v=0;save();render()};
+    table.appendChild(b);
+    if(p==='BTN'){const d=document.createElement('div');d.className='dealer';d.textContent='D';d.style.left=(50+31*Math.cos(a))+'%';d.style.top=(50+27*Math.sin(a))+'%';table.appendChild(d)}
+  }
 }
 $('center').onclick=()=>{st.all=!st.all;render()};
-$('mode').onclick=e=>{const m=e.target.dataset.m;if(!m)return;st.mode=m;st.all=false;if(m==='open'&&st.pos==='BB')st.pos='BTN';fix();save();render()};
-$('opp').onclick=e=>{const o=e.target.dataset.o;if(!o)return;st.opp=o;st.all=false;save();render()};
+$('sits').onclick=e=>{const k=e.target.dataset.k;if(k==null||(q&&!q.done))return;st.sit=+k;st.v=0;st.all=false;save();render()};
+$('vars').onclick=e=>{const k=e.target.dataset.k;if(k==null||(q&&!q.done))return;st.v=+k;st.all=false;save();render()};
+$('types').innerHTML=Object.keys(TYPES).map(k=>`<button data-t="${k}">${TYPES[k].label}</button>`).join('');
+$('types').onclick=e=>{const t=e.target.dataset.t;if(!t||t===ty)return;ty=t;T=TYPES[t];load();save();seats();buildFocus();if(!$('vQuiz').hidden)next();else render()};
 
 const grid=$('grid'),cells=[];
 for(let i=0;i<13;i++)for(let j=0;j<13;j++){
   const h=name(i,j),b=document.createElement('button');b.className='c'+(i===j?' pair':'');b.textContent=h;b.dataset.h=h;
   b.onclick=()=>{if(q&&!q.done)return;st.sel=st.sel===h?null:h;render()};grid.appendChild(b);cells.push(b);
 }
+const pc=v=>(v/13.26).toFixed(1).replace('.',',')+' %';
+const say=a=>a.length?a.map(k=>A[k].l.toLowerCase()).join(' o ')+(a.length>1?' (según el combo)':''):'fold';
 
 function render(){
-  const vs=st.mode==='vs';
-  document.querySelectorAll('.seat').forEach(s=>{const p=s.dataset.p;
-    s.setAttribute('aria-pressed',!st.all&&p===st.pos);
-    s.classList.toggle('opener',!st.all&&vs&&p===st.opp);
-    s.classList.toggle('off',!st.all&&((vs&&p==='UTG')||(!vs&&p==='BB')));});
+  const tab=cur(),s=T.sits(st.pos);
+  $('types').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===ty));
+  $('src').textContent=T.src;
+  document.querySelectorAll('.seat').forEach(x=>x.setAttribute('aria-pressed',!st.all&&x.dataset.p===st.pos));
   $('center').setAttribute('aria-pressed',st.all);
-  $('mode').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===st.mode));
-  $('opp').hidden=!vs;
-  if(vs)$('opp').innerHTML='Sube:'+openersOf(st.pos).map(o=>`<button data-o="${o}" aria-pressed="${o===st.opp}">${o}</button>`).join('');
-  let n=0;
+  $('sits').innerHTML=s.map((x,k)=>`<button data-k="${k}" aria-pressed="${!st.all&&k===st.sit}">${x[0]}</button>`).join('');
+  const vs=s[st.sit][1];
+  $('vars').hidden=st.all||vs.length<2;
+  $('vars').innerHTML=vs.map((x,k)=>`<button data-k="${k}" aria-pressed="${k===st.v}">${x.v}</button>`).join('');
+  let n=0,mixed=false;
   for(const c of cells){
-    const h=c.dataset.h;let bg='';
-    if(st.all){const e=earliest(h);if(e){bg=HEAT[e];n+=combos(h)}}
-    else{const a=act(st,h);if(a!=='fold'){bg=COL[a];n+=combos(h)}}
-    c.style.background=bg;c.classList.toggle('on',!!bg);c.classList.toggle('sel',st.sel===h);
+    const h=c.dataset.h;let bg='',dark=false;
+    if(st.all){const e=earliest(h);if(e){bg=T.HEAT[e];n+=combos(h)}}
+    else{const a=acts(tab,h);if(a.length){n+=combos(h);dark=a.length===1&&!!A[a[0]].dark;
+      bg=a.length===1?A[a[0]].c:`linear-gradient(135deg,${A[a[0]].c} 50%,${A[a[1]].c} 50%)`;if(a.length>1)mixed=true}}
+    c.style.background=bg;c.classList.toggle('on',!!bg);c.classList.toggle('dark',dark);c.classList.toggle('sel',st.sel===h);
   }
-  const pc=v=>(v/13.26).toFixed(1).replace('.',',')+'%';
   if(st.all){
     $('gTitle').textContent='Desde dónde se abre cada mano';
     $('pct').innerHTML=pc(n)+'<span> se abre en algún asiento</span>';
-    $('legend').innerHTML=POS.slice(0,5).map(p=>`<span><i style="background:${HEAT[p]}"></i>${p}</span>`).join('');
-    $('tip').innerHTML='<strong>Lectura rápida:</strong> rojo oscuro se abre desde cualquier asiento; amarillo solo desde el botón; verde solo desde la SB.';
-  }else if(!vs){
-    const d=OPEN[st.pos];
-    $('gTitle').textContent=st.pos+' · abrir primero';
-    $('pct').innerHTML=pc(n)+'<span> de las manos</span>';
-    $('legend').innerHTML='<span><i style="background:var(--raise)"></i>Subir</span><span><i style="background:var(--cell)"></i>Fold</span><span>suited arriba a la derecha · offsuit abajo a la izquierda</span>';
-    $('tip').innerHTML=`<span class="size">${d.size}</span><strong>${st.pos}.</strong> ${d.tip}`;
+    $('legend').innerHTML=OPENPOS().map(p=>`<span><i style="background:${T.HEAT[p]}"></i>${p}</span>`).join('');
+    $('tip').innerHTML='<strong>Lectura rápida:</strong> lo más oscuro se abre desde UTG; el amarillo solo desde el botón.';
   }else{
-    const s=SV[st.opp][st.pos],t=[...s.t].reduce((a,h)=>a+combos(h),0);
-    $('gTitle').textContent=st.pos+' contra subida de '+st.opp;
-    $('pct').innerHTML=pc(n)+'<span> juegas · 3-bet '+pc(t)+'</span>';
-    $('legend').innerHTML='<span><i style="background:var(--three)"></i>3-bet</span>'+(VS[st.opp][st.pos].c?'<span><i style="background:var(--call)"></i>Pagar</span>':'')+'<span><i style="background:var(--cell)"></i>Fold</span>';
-    const ip=st.pos==='BTN'||(['HJ','CO'].includes(st.pos));
-    $('tip').innerHTML=`<span class="size">3-bet ${ip?'~3x':'~4x'}</span><strong>${st.pos} vs ${st.opp}.</strong> ${VTIP[st.pos]}`;
+    $('gTitle').textContent=tab.t;
+    $('pct').innerHTML=pc(n)+'<span> de las manos</span>';
+    $('legend').innerHTML=Object.keys(tab.layers).map(k=>`<span><i style="background:${A[k].c}"></i>${A[k].l}</span>`).join('')+(mixed?'<span><i style="background:linear-gradient(135deg,var(--three) 50%,var(--call) 50%)"></i>Según el combo</span>':'')+'<span><i style="background:var(--cell)"></i>Fold</span>';
+    $('tip').innerHTML=`<strong>${st.pos}.</strong> ${tab.tip}`+(mixed?' Las celdas partidas se juegan de las dos formas según el combo: por ejemplo, un combo de AA se paga y los otros cinco se 3-betean.':'');
   }
   const h=st.sel;
-  if(!h){$('info').textContent='Toca una mano para ver qué hacer con ella en cada asiento.'}
+  if(!h)$('info').textContent='Toca una mano para ver qué hacer con ella.';
   else{
-    const op=POS.slice(0,5).filter(p=>SO[p].has(h));
-    let x=`<b>${h}</b>`+(op.length?`Se abre desde ${op.length===5?'todas las posiciones':op.join(', ')}.`:'No se abre desde ningún asiento.');
-    if(vs&&!st.all)x+=` Aquí (${st.pos} vs ${st.opp}): ${LBL[act(st,h)].toLowerCase()}.`;
+    const op=OPENPOS().filter(p=>expand(T.open[p]).has(h));
+    let x=`<b>${h}</b>`+(op.length?`Se abre desde ${op.length===OPENPOS().length?'todos los asientos':op.join(', ')}.`:'No se abre desde ningún asiento.');
+    if(!st.all)x+=` En esta tabla: ${say(acts(tab,h))}.`;
     $('info').innerHTML=x;
   }
 }
 
 // práctica
-let q=null,score={ok:0,tot:0,streak:0,best:0},focus='Todas';
-try{const s=JSON.parse(localStorage.getItem('rangosQ')||'null');if(s)score=Object.assign(score,s,{streak:0})}catch(e){}
-$('focus').innerHTML=['Todas',...POS].map(f=>`<button data-f="${f}" aria-pressed="${f===focus}">${f}</button>`).join('');
+let score={ok:0,tot:0,streak:0,best:0},focus='Todas';
+try{const s=JSON.parse(localStorage.getItem('rangosQ9')||'null');if(s)score=Object.assign(score,s,{streak:0})}catch(e){}
+function buildFocus(){focus='Todas';$('focus').innerHTML=['Todas',...T.POS].map(f=>`<button data-f="${f}" aria-pressed="${f===focus}">${f}</button>`).join('')}
 $('focus').onclick=e=>{const f=e.target.dataset.f;if(!f)return;focus=f;$('focus').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));next()};
-const SCEN=[];for(const p in OPEN)SCEN.push({mode:'open',pos:p});for(const o in VS)for(const h in VS[o])SCEN.push({mode:'vs',pos:h,opp:o});
+function scen(){const out=[];for(const p of T.POS)T.sits(p).forEach((x,si)=>x[1].forEach((t,vi)=>{if(x[0]!=='4-bet / 5-bet'||vi===0)out.push({pos:p,sit:si,v:vi})}));return out}
 const SU=['♠','♥','♦','♣'],ALL=[];for(let i=0;i<13;i++)for(let j=0;j<13;j++)ALL.push(name(i,j));
-function pickHand(sc){
-  if(Math.random()<.35)return ALL[Math.floor(Math.random()*169)];
-  const edge=ALL.filter((h,k)=>{const i=Math.floor(k/13),j=k%13,a=act(sc,h);
-    return[[0,1],[1,0],[0,-1],[-1,0]].some(([di,dj])=>{const x=i+di,y=j+dj;return x>=0&&y>=0&&x<13&&y<13&&act(sc,ALL[x*13+y])!==a})});
+function pickHand(tab){
+  if(Math.random()<.3)return ALL[Math.floor(Math.random()*169)];
+  const key=h=>acts(tab,h).join();
+  const edge=ALL.filter((h,k)=>{const i=Math.floor(k/13),j=k%13,a=key(h);
+    return[[0,1],[1,0],[0,-1],[-1,0]].some(([di,dj])=>{const x=i+di,y=j+dj;return x>=0&&y>=0&&x<13&&y<13&&key(ALL[x*13+y])!==a})});
   return edge[Math.floor(Math.random()*edge.length)];
 }
 function next(){
-  const pool=SCEN.filter(s=>focus==='Todas'||s.pos===focus),sc=pool[Math.floor(Math.random()*pool.length)];
-  const h=pickHand(sc);q={sc,h,done:false};
-  Object.assign(st,{mode:sc.mode,pos:sc.pos,opp:sc.opp||st.opp,all:false,sel:null});render();
-  $('qpos').innerHTML=sc.pos+(sc.mode==='open'?'<span>todos foldean hasta ti</span>':`<span>${sc.opp} sube a ${sc.opp==='SB'?'3':'2,5'} bb, el resto foldea</span>`);
+  const pool=scen().filter(s=>focus==='Todas'||s.pos===focus),sc=pool[Math.floor(Math.random()*pool.length)];
+  Object.assign(st,{pos:sc.pos,sit:sc.sit,v:sc.v,all:false,sel:null});
+  const tab=cur(),h=pickHand(tab);q=null;render();q={tab,h,done:false};
+  $('qpos').innerHTML=sc.pos+' · '+T.sits(sc.pos)[sc.sit][0]+`<span>${tab.q}</span>`;
   const s1=Math.floor(Math.random()*4),s2=h[2]==='s'?s1:(s1+1+Math.floor(Math.random()*3))%4;
   const card=(r,s)=>`<div class="card${s===1||s===2?' red':''}"><span>${r==='T'?'10':r}</span><span class="s">${SU[s]}</span></div>`;
   $('cards').innerHTML=card(h[0],s1)+card(h[1],s2);
-  const opts=sc.mode==='open'?['fold','raise']:VS[sc.opp][sc.pos].c?['fold','call','three']:['fold','three'];
-  $('answers').innerHTML=opts.map(o=>`<button class="b-${o}" data-a="${o}">${LBL[o]}</button>`).join('');
+  $('answers').innerHTML=['fold',...Object.keys(tab.layers).reverse()].map(o=>`<button class="b-${o==='limp'?'call':o}" data-a="${o}">${o==='fold'?'Fold':A[o].l}</button>`).join('');
   $('fb').className='fb';$('fb').textContent='¿Qué haces?';
   for(const c of cells)c.style.opacity='.12';
 }
 $('answers').onclick=e=>{
   const a=e.target.dataset.a;if(!a||!q||q.done)return;q.done=true;
-  const right=act(q.sc,q.h),ok=a===right;
+  const right=acts(q.tab,q.h),ok=right.length?right.includes(a):a==='fold';
   score.tot++;if(ok){score.ok++;score.streak++;score.best=Math.max(score.best,score.streak)}else score.streak=0;
-  try{localStorage.setItem('rangosQ',JSON.stringify(score))}catch(e){}
+  try{localStorage.setItem('rangosQ9',JSON.stringify(score))}catch(e){}
   $('fb').className='fb '+(ok?'ok':'bad');
-  $('fb').innerHTML=(ok?'<b>Correcto.</b> ':`<b>No: ${LBL[right]}.</b> `)+`${q.h} en ${q.sc.pos}${q.sc.opp?' vs '+q.sc.opp:''}. Mira dónde cae en la tabla.`;
+  const r=say(right);
+  $('fb').innerHTML=(ok?'<b>Correcto.</b> ':`<b>No: ${r[0].toUpperCase()+r.slice(1)}.</b> `)+`${q.h} en ${q.tab.t}.`;
   for(const c of cells)c.style.opacity='';st.sel=q.h;render();paint();
   setTimeout(()=>{if(q&&q.done&&!$('vQuiz').hidden)next()},ok?1100:2800);
 };
@@ -310,10 +367,10 @@ function tab(quiz){
   $('tRangos').setAttribute('aria-pressed',!quiz);$('tQuiz').setAttribute('aria-pressed',quiz);
   $('vRangos').hidden=quiz;$('vQuiz').hidden=!quiz;
   if(quiz){$('vQuiz').prepend($('grid'));$('grid').style.marginBottom='14px';paint();next()}
-  else{$('info').before($('grid'));$('grid').style.marginBottom='';for(const c of cells)c.style.opacity='';q=null;fix();render()}
+  else{$('info').before($('grid'));$('grid').style.marginBottom='';for(const c of cells)c.style.opacity='';q=null;render()}
 }
 $('tRangos').onclick=()=>tab(false);$('tQuiz').onclick=()=>tab(true);
-fix();render();
+seats();buildFocus();render();
 }
 </script>
 <script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));</script>
